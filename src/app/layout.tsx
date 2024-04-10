@@ -1,8 +1,7 @@
+import { ModeContextProvider } from "@-ft/mode-next";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { ThisIsClientComponent } from "./components/ThisIsClientComponent";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +15,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="/mode.js" />
+      </head>
+      <body>
+        <ThisIsClientComponent>
+          <ModeContextProvider variableName="npm:@-ft/mode-codegen">
+            {children}
+          </ModeContextProvider>
+        </ThisIsClientComponent>
+      </body>
     </html>
   );
 }
