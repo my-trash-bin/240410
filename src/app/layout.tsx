@@ -1,5 +1,5 @@
-import { ModeContextProvider } from "@-ft/mode-next";
 import type { Metadata } from "next";
+import { ModeContextProvider } from "./[locale]/lib/mode-next";
 import { ThisIsClientComponent } from "./components/ThisIsClientComponent";
 import "./globals.css";
 
