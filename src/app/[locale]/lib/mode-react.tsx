@@ -36,8 +36,8 @@ export function ModeContextProvider({
     [modeManager]
   );
 
-  useEffect(() => modeManager.watchMode(setMode), [modeManager, setMode]);
-  useEffect(() => modeManager.watchTheme(setTheme), [modeManager, setTheme]);
+  useEffect(() => modeManager.watchMode(setMode), [modeManager]);
+  useEffect(() => modeManager.watchTheme(setTheme), [modeManager]);
 
   return (
     <ModeContext.Provider

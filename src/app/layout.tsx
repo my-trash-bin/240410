@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { ModeContextProvider } from "./[locale]/lib/mode-next";
 import { ThisIsClientComponent } from "./components/ThisIsClientComponent";
 import "./globals.css";
@@ -13,15 +14,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = cookies().get("theme");
+
   return (
-    <html lang="en">
+    <html lang="en" className={theme?.value} suppressHydrationWarning>
       <head>
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/mode.js" />
       </head>
-      <body>
+      <body className="bg-white text-black dark:bg-black dark:text-white">
         <ThisIsClientComponent>
-          <ModeContextProvider variableName="npm:@-ft/mode-codegen">
+          <ModeContextProvider
+            variableName="npm:@-ft/mode-codegen"
+            ssrInitialMode={theme?.value ?? "system"}
+          >
             {children}
           </ModeContextProvider>
         </ThisIsClientComponent>
